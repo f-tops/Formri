@@ -2,7 +2,7 @@
 
 ## Overview
 
-Formri is a web application built using .NET technologies. The application allows users to submit a contact form, and stores the submitted data in a Microsoft SQL Server database. The application includes additional features such as email notifications and user data caching.
+Formri is a web application built using .NET technologies, mainly Aspire. The application allows users to submit a contact form, and stores the submitted data in a Microsoft SQL Server database. The application includes additional features such as email notifications and user data caching.
 
 ## Features
 - Contact form submission
@@ -11,6 +11,7 @@ Formri is a web application built using .NET technologies. The application allow
 - Fetching user details from an external API
 - Sending email notifications with user data
 - Displaying all users and users with ".biz" email addresses
+- Complete Aspire dashboard used for analyzing container logs, performance and other infrastructure information
 
 ## Technologies Used
 - .NET Core 8 Aspire
