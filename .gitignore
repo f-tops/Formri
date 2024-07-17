@@ -1,0 +1,13 @@
+﻿Formri.ApiService/bin
+Formri.ApiService/obj
+Formri.AppHost/bin
+Formri.Domain/bin
+Formri.Peristence/bin
+Formri.ServiceDefaults/obj
+Formri.Tests/bin
+Formri.Web/bin
+Formri.Web/obj
+Formri.Tests/obj
+Formri.Peristence/obj
+Formri.Domain/obj
+Formri.AppHost/obj

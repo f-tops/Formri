@@ -1,0 +1,84 @@
+﻿@page "/users"
+@using Formri.Domain.Clients.ContactApi
+@using Formri.Domain.Models
+@using Formri.Domain.Entities
+@inject IApiClient ApiClient
+
+<h3>All Users</h3>
+@if (allUsers != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Address</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in allUsers)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Website</td>
+                    <td>@user.Address.Street, @user.Address.City</td>
+                    <td>@user.Company.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
+
+<h3>Users with .biz Email</h3>
+@if (bizUsers != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Address</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in bizUsers)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Website</td>
+                    <td>@user.Address.Street, @user.Address.City</td>
+                    <td>@user.Company.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
+
+@code {
+    private IEnumerable<User> allUsers;
+    private IEnumerable<User> bizUsers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allUsers = await ApiClient.GetAllUsersAsync();
+        bizUsers = await ApiClient.GetBizUsersAsync();
+    }
+}

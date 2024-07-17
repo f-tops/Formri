@@ -1,0 +1,55 @@
+﻿@page "/contact"
+@using Formri.Domain.Clients.ContactApi
+@using Formri.Domain.Models.ContactForm
+@using Refit
+@inject IApiClient ApiClient
+
+<h3>Contact Form</h3>
+
+<EditForm Model="FormData" OnValidSubmit="HandleValidSubmit" FormName="ContactForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <InputText id="firstName" class="form-control" @bind-Value="FormData.FirstName" />
+        <ValidationMessage For="() => FormData.FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <InputText id="lastName" class="form-control" @bind-Value="FormData.LastName" />
+        <ValidationMessage For="() => FormData.LastName" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="FormData.Email" />
+        <ValidationMessage For="() => FormData.Email" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-info">
+        @Message
+    </div>
+}
+
+@code {
+    [SupplyParameterFromForm]
+    private ContactFormModel FormData { get; set; } = new ContactFormModel();
+    private string Message { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await ApiClient.SubmitForm(FormData);
+            Message = $"Form submitted successfully!";
+        }
+        catch (Exception ex)
+        {
+            Message = $"Unexpected error: {ex.Message}";
+        }
+    }
+}
